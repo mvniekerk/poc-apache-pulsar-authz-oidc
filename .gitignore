@@ -7,3 +7,5 @@ build
 **/.DS_Store
 *.iml
 .idea/
+
+docker/pulsar/pulsar-oidc-authz-all.jar
