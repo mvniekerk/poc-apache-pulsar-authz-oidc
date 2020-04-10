@@ -19,9 +19,11 @@ public class AuthenticationProviderOidc implements AuthenticationProvider {
 
     final static String OIDC = "oidc";
 
+    private OidcConfig oidcConfig;
+
     @Override
     public void initialize(ServiceConfiguration config) throws IOException {
-
+        this.oidcConfig = new OidcConfig(config);
     }
 
     @Override

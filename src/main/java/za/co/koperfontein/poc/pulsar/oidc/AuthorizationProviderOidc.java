@@ -17,6 +17,7 @@ public class AuthorizationProviderOidc implements AuthorizationProvider {
     public ServiceConfiguration conf;
     public ConfigurationCacheService configCache;
     private PulsarAuthorizationProvider defaultProvider;
+    private OidcConfig oidcConfig;
 
     public AuthorizationProviderOidc() { }
 
@@ -30,6 +31,7 @@ public class AuthorizationProviderOidc implements AuthorizationProvider {
         this.conf = conf;
         this.configCache = configCache;
         defaultProvider = new PulsarAuthorizationProvider(conf, configCache);
+        this.oidcConfig = new OidcConfig(conf);
     }
 
     @Override
