@@ -1,2 +1,2 @@
 FROM apachepulsar/pulsar
-COPY oidc.jar /opt/
+COPY pulsar-oidc-authz-all.jar /opt/
