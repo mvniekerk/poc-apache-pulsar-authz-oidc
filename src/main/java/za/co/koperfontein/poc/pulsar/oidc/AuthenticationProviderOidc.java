@@ -1,5 +1,6 @@
 package za.co.koperfontein.poc.pulsar.oidc;
 
+import io.quarkus.oidc.runtime.OidcTenantConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.pulsar.broker.ServiceConfiguration;
 import org.apache.pulsar.broker.authentication.AuthenticationDataSource;
@@ -68,8 +69,8 @@ public class AuthenticationProviderOidc implements AuthenticationProvider {
         }
     }
 
-    private String parseBiscuit(final String biscuit) throws AuthenticationException {
-        LOGGER.info("Biscuit to parse: {}", biscuit);
+    private String parseBiscuit(final String jwt) throws AuthenticationException {
+        LOGGER.info("Jwt to parse: {}", jwt);
 
 //        Either<Error, Biscuit> deser = Biscuit.from_bytes(Base64.getUrlDecoder().decode(biscuit));
 //
