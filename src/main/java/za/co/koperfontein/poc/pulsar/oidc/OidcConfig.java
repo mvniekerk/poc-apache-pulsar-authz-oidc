@@ -4,6 +4,8 @@ import io.quarkus.oidc.runtime.OidcTenantConfig;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.pulsar.broker.ServiceConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -12,31 +14,32 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public class OidcConfig extends OidcTenantConfig {
-    public static final String OIDC_AUTH_SERVER_URL = "oidc-auth-server-url";
-    public static final String OIDC_CLIENT_ID = "oidc-client-id";
-    public static final String OIDC_CONNECTION_DELAY = "oidc-connection-delay";
-    public static final String OIDC_INTROSPECTION_PATH = "oidc-introspection-path";
-    public static final String OIDC_JWKS_PATH = "oidc-jwks-path";
-    public static final String OIDC_PUBLIC_KEY = "oidc-public-key";
-    public static final String OIDC_TENANT_ENABLED = "oidc-tenant-enabled";
+    private static final Logger LOGGER = LoggerFactory.getLogger(OidcConfig.class.getName());
+    public static final String OIDC_AUTH_SERVER_URL = "oidcAuthServerUrl";
+    public static final String OIDC_CLIENT_ID = "oidcClientId";
+    public static final String OIDC_CONNECTION_DELAY = "oidcConnectionDelay";
+    public static final String OIDC_INTROSPECTION_PATH = "oidcIntrospectionPath";
+    public static final String OIDC_JWKS_PATH = "oidcJwksPath";
+    public static final String OIDC_PUBLIC_KEY = "oidcPublicKey";
+    public static final String OIDC_TENANT_ENABLED = "oidcTenantEnabled";
 
-    public static final String OIDC_AUTHENTICATION_COOKIE_PATH = "oidc-authentication-cookie-path";
-    public static final String OIDC_AUTHENTICATION_EXTRA_PATHS = "oidc-authentication-extra-paths";
-    public static final String OIDC_AUTHENTICATION_REDIRECT_PATHS = "oidc-authentication-redirect-paths";
-    public static final String OIDC_AUTHENTICATION_RESTORE_PATH_AFTER_REDIRECT = "oidc-authentication-restore-path-after-redirect";
-    public static final String OIDC_AUTHENTICATION_SCOPES = "oidc-authentication-scopes";
+    public static final String OIDC_AUTHENTICATION_COOKIE_PATH = "oidcAuthenticationCookiePath";
+    public static final String OIDC_AUTHENTICATION_EXTRA_PATHS = "oidcAuthenticationExtraPaths";
+    public static final String OIDC_AUTHENTICATION_REDIRECT_PATHS = "oidcAuthenticationRedirectPaths";
+    public static final String OIDC_AUTHENTICATION_RESTORE_PATH_AFTER_REDIRECT = "oidcAuthenticationRestorePathAfterRedirect";
+    public static final String OIDC_AUTHENTICATION_SCOPES = "oidcAuthenticationScopes";
 
-    public static final String OIDC_SECRET = "oidc-secret";
-    public static final String OIDC_CLIENT_SECRET = "oidc-client-secret";
-    public static final String OIDC_CLIENT_METHOD = "oidc-client-method";
+    public static final String OIDC_SECRET = "oidcSecret";
+    public static final String OIDC_CLIENT_SECRET = "oidcClientSecret";
+    public static final String OIDC_CLIENT_METHOD = "oidcClientMethod";
 
-    public static final String OIDC_ROLE_CLAIM_PATH = "oidc-role-claim-path";
-    public static final String OIDC_ROLE_CLAIM_SEPARATOR = "oidc-role-claim-separator";
+    public static final String OIDC_ROLE_CLAIM_PATH = "oidcRoleClaimPath";
+    public static final String OIDC_ROLE_CLAIM_SEPARATOR = "oidcRoleClaimSeparator";
 
-    public static final String OIDC_TOKEN_AUDIENCE = "oidc-token-audience";
-    public static final String OIDC_TOKEN_EXPIRATION_GRACE = "oidc-token-expiration-grace";
-    public static final String OIDC_TOKEN_ISSUER = "oidc-token-issuer";
-    public static final String OIDC_TOKEN_PRINCIPAL_CLAIM = "oidc-token-principal-claim";
+    public static final String OIDC_TOKEN_AUDIENCE = "oidcTokenAudience";
+    public static final String OIDC_TOKEN_EXPIRATION_GRACE = "oidcTokenExpirationGrace";
+    public static final String OIDC_TOKEN_ISSUER = "oidcTokenIssuer";
+    public static final String OIDC_TOKEN_PRINCIPAL_CLAIM = "oidcTokenPrincipalClaim";
 
     public OidcConfig(ServiceConfiguration conf) {
         this.applicationType = ApplicationType.SERVICE;
@@ -47,7 +50,7 @@ public class OidcConfig extends OidcTenantConfig {
         setIfNotNull(OIDC_INTROSPECTION_PATH, conf, this::setIntrospectionPath);
         setIfNotNull(OIDC_JWKS_PATH, conf, this::setJwksPath);
         setIfNotNull(OIDC_PUBLIC_KEY, conf, this::setJwksPath);
-        this.tenantEnabled = (boolean) conf.getProperty(OIDC_TENANT_ENABLED);
+        this.tenantEnabled = true;
 
         this.setAuthentication(authentication(conf));
         this.setCredentials(credentials(conf));
