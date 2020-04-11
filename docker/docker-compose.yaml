@@ -42,6 +42,9 @@ services:
     expose:
       - 8080
       - 6650
+    ports:
+      - 8081:8080
+      - 6650:6650
     environment:
       - PULSAR_MEM=" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g"
     command: >
@@ -50,3 +53,12 @@ services:
       && bin/pulsar standalone"
     depends_on:
       - keycloak
+
+  dashboard:
+    image: apachepulsar/pulsar-dashboard
+    depends_on:
+      - pulsar
+    ports:
+      - "8082:80"
+    environment:
+      - SERVICE_URL=http://standalone:8080

@@ -6,7 +6,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.pulsar.broker.ServiceConfiguration;
 
 import java.time.Duration;
-import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -37,7 +36,7 @@ public class OidcConfig extends OidcTenantConfig {
     public static final String OIDC_TOKEN_AUDIENCE = "oidc-token-audience";
     public static final String OIDC_TOKEN_EXPIRATION_GRACE = "oidc-token-expiration-grace";
     public static final String OIDC_TOKEN_ISSUER = "oidc-token-issuer";
-    public static final String OIDC_TOKEN_PRINCIPAL = "oidc-token-principal-claim";
+    public static final String OIDC_TOKEN_PRINCIPAL_CLAIM = "oidc-token-principal-claim";
 
     public OidcConfig(ServiceConfiguration conf) {
         this.applicationType = ApplicationType.SERVICE;
@@ -106,7 +105,7 @@ public class OidcConfig extends OidcTenantConfig {
                 .map(b -> (Integer) b);
         ret.issuer = Optional.ofNullable(conf.getProperty(OIDC_TOKEN_ISSUER))
                 .map(b -> (String) b);
-        ret.principalClaim = Optional.ofNullable(conf.getProperty(OIDC_TOKEN_PRINCIPAL))
+        ret.principalClaim = Optional.ofNullable(conf.getProperty(OIDC_TOKEN_PRINCIPAL_CLAIM))
                 .map(b -> (String) b);
         return ret;
     }
